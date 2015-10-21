@@ -47,27 +47,33 @@ function newGame(){
 function init(){
     n=0;t=1200;score=0;i=0;
     updateScore(score);
+
+    clearInterval(time1);
+    clearInterval(time2);
     $('.block').remove();
+
     bird.stop(true,false);
     bird.css({
         'top':'45%'
     });
+
     time1 = setInterval(function () {
         keepRunning();
     },50);
     time2 = setInterval(function () {
         generateBlock(n++);
     },t--);
+    
     fallStart();
 }
 
-function generateBlock(i){
-    container.append('<div class="block block'+i+'">' +
+function generateBlock(s){
+    container.append('<div class="block block'+s+'">' +
     '<div class="top"></div><div class="bottom"></div></div>');
     var randWay = containerHeight/10 + parseInt(Math.random()*containerHeight/2);
-    $('.block'+i+' .top').css('height',randWay+'px');
-    $('.block'+i+' .bottom').css('height',containerHeight-randWay-containerHeight*0.3 +'px');
-    blockMove(i,1100,5000);
+    $('.block'+s+' .top').css('height',randWay+'px');
+    $('.block'+s+' .bottom').css('height',containerHeight-randWay-containerHeight*0.3 +'px');
+    blockMove(s,1100,5000);
 }
 
 function isGameover(){
